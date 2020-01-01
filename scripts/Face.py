@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Nov 27 23:24:15 2019
+Object to represent a face and its location in the computers vision
 
-@author: thomas
+Last Updated: 1/1/2020
 """
 
 class Face:
