@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Oct 31 14:02:58 2019
+Last Updated on 1/1/2020
 
-@author: thomas
+Takes 100 pictures of a detected face and stores them for use in the face_trainer
+
+@author: Thomas Talasco
 """
 
 import cv2
@@ -33,9 +35,11 @@ class pictureTaker:
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             faces = self.face_detector.detectMultiScale(gray, 1.3, 5)
     
+            # For each face
             for (x,y,w,h) in faces:
                 cv2.rectangle(frame, (x,y), (x+w,y+h), (255,0,0), 2)  
-            
+                
+                # Save the image by cropping down to the face
                 cv2.imwrite('/home/thomas/Desktop/Facial_Recognition/dataset/image'+ str(self.images_taken) +'-'+ str(self.face_id) +'.png', gray[y:y+h,x:x+w])
                 print("Took Picture "+ str(self.images_taken))
                 self.images_taken += 1
