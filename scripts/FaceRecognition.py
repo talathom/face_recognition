@@ -25,7 +25,7 @@ class Face_Recognizer:
         self.depth_sub = rospy.Subscriber("/camera/depth/image", Image, self.depth_callback)
         self.recognizer = cv2.face.LBPHFaceRecognizer_create()
         self.recognizer.read('trainer/trainer.yml')
-        self.faceCascade = cv2.CascadeClassifier("faces.xml")
+        self.faceCascade = cv2.CascadeClassifier("Faces.xml")
         self.pub = rospy.Publisher("/face_recognizer/FaceMessage", FaceMessage, queue_size=10)
         self.font = cv2.FONT_HERSHEY_SIMPLEX
         self.depth_image = [[0 for x in range(640)] for y in range(480)] # initialize zero array
@@ -45,7 +45,7 @@ class Face_Recognizer:
             print(e)
             
     def image_callback(self, data):
-        self.faceCascade = cv2.CascadeClassifier("faces.xml")
+        self.faceCascade = cv2.CascadeClassifier("Faces.xml")
         #print("NEW IMAGE")
         global METERS_PER_FEET
         global message
