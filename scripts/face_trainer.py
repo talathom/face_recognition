@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Nov 26 15:02:38 2019
+Last Updated on 1/1/2020
 
-@author: thomas
+Makes the training model based on pictures taken and stored in the dataset
+
+@author: Thomas Talasco
 """
 
 import cv2
