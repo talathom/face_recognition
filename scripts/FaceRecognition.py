@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """
-Created on Tue Nov 26 15:08:33 2019
+Last Updated on 1/1/2020
 
-@author: thomas
+@author: Thomas Talasco
 """
 
 import cv2
@@ -68,11 +68,13 @@ class Face_Recognizer:
             cv2.rectangle(frame, (x,y), (x+w,y+h), (0,255,0), 2)
             self.id, confidence = self.recognizer.predict(gray[y:y+h,x:x+w])
             
-            # Check if confidence is less them 100 ==> "0" is perfect match 
+            # Check if confidence is less them 125 ==> "0" is perfect match 
             if (confidence < 125):
+                #Detected known face
                 self.id = self.names[self.id]
                 confidence = "  {0}%".format(round(100 - confidence))
             else:
+                #Flag face as unknown
                 self.id = "unknown"
                 confidence = "  {0}%".format(round(100 - confidence))
             face = Face(x, y, w, h, -1, str(self.id))
@@ -80,8 +82,7 @@ class Face_Recognizer:
             face.z = self.depth_image[int(face.ymid)][int(face.xmid)]*METERS_PER_FEET #Converts meters to feet
             if math.isnan(face.z): # Check if face is too close
                 face.z = -1
-            #print(str(midPt))
-                #TO DO: PUBLISH MESSAGE
+            #Publish Message    
             message.x = face.x
             message.y = face.y
             message.z = face.z
@@ -89,7 +90,6 @@ class Face_Recognizer:
             message.w = face.w
             message.name = face.name
             self.pub.publish(message)
-            #print("Published Message")
                     
                     
                     
